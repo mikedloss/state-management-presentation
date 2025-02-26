@@ -1,40 +1,302 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
-		<title>reveal.js</title>
+    <title>reveal.js</title>
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/rula.css" />
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/material.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h3>Frontend State Management</h3>
+          <p>working title</p>
+        </section>
+        <section>
+          <section>
+            <h3>What state is</h3>
+            <img class="fragment" src="assets/image1.png" />
+            <aside class="notes">
+              <div>- "A components memory"</div>
+              <div>- Adds interactivity between users and components</div>
+            </aside>
+          </section>
+          <section>
+            <h3>State vs Props</h3>
+            <p class="fragment">
+              State is <span class="highlight-fern-50">controlled</span> by the
+              component itself
+            </p>
+            <p class="fragment">
+              Props are <span class="highlight-amber-50">passed in</span> from a
+              parent component
+            </p>
+            <p class="fragment">
+              State is <span class="highlight-fern-50">mutable</span>, props are
+              <span class="highlight-amber-50">immutable</span>
+            </p>
+          </section>
+          <section>
+            <h3>What state isn't</h3>
+            <div class="fragment">
+              Does it remain unchanged over time?
+            </div>
+            <div class="fragment">
+              Is it passed in from a parent component?
+              <aside class="notes">
+                You /can/ set props as state, but I'll talk about that later.
+              </aside>
+            </div>
+            <div class="fragment">
+              Can you compute it from existing state or props?
+            </div>
+            <div class="fragment">
+              <span class="highlight-red-50">It's not state!</span>
+              <aside class="notes">
+                <p>If it never changes then why make it a state variable?</p>
+                <p>
+                  If it's something that can be computed from existing state or
+                  props, then it shouldn't be state.
+                </p>
+              </aside>
+            </div>
+          </section>
+          <section>
+            <h3>Unidirectional data flow</h3>
+            <aside class="notes">
+              By default in React, data flows down the component tree, not up
+            </aside>
+            <div data-markdown>
+              <textarea data-template data-line-numbers>
+								```tsx [|2,4|8-14]
+								function Parent {
+									const [count] = useState(10);
+									return (
+										<Child count={count} />
+									);
+								};
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+								function Child({ count }) {
+									return (
+										<div>
+											<p>{count}</p>
+										</div>
+									)
+								}
+								```
+							</textarea
+              >
+            </div>
+          </section>
+          <section>
+            <h3>Unidirectional data flow</h3>
+            <p>You can also pass functions down as props</p>
+            <aside class="notes">
+              Just keep in mind that data flows down, not up. So we pass a
+              function handler down that changes state above. We can't directly
+              change props
+            </aside>
+            <div data-markdown>
+              <textarea data-template data-line-numbers>
+								```tsx [|2-5|7|11-18]
+								function Parent {
+									const [count, setCount] = useState(0);
+									const handleIncrement = () => {
+										setCount(prev => prev + 1);
+									}
+									return (
+										<Child count={count} onIncrement={handleIncrement} />
+									);
+								};
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+								function Child({ count, onIncrement }) {
+									return (
+										<div>
+											<p>{count}</p>
+											<button onClick={onIncrement}>+1</button>
+										</div>
+									)
+								}
+								```
+							</textarea>
+            </div>
+          </section>
+          <section>
+            <h3>Where should it go?</h3>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3>Evolution</h3>
+          </section>
+          <section>
+            <p>
+              Class components had <code>this.state</code> and <code>this.setState</code>
+            </p>
+						<p>this was fine until our apps grew and got more complex</p>
+          </section>
+					<section>
+            <h3>MVC -> Flux at Facebook</h3>
+            <img class="fragment" src="assets/image2.png" />
+          </section>
+					<section>
+            <h3>Redux</h3>
+            <p class="fragment">Single source of truth</p>
+            <p class="fragment">Immutability</p>
+            <p class="fragment">Predictable state changes through reducers</p>
+          </section>
+					<section>
+            <h3>Too much?</h3>
+						<div class="r-stack">
+							<div>
+								<p class="fragment">
+									Form state? Put it in the Redux store
+								</p>
+								<p class="fragment">
+									API data? Put it in the Redux store
+								</p>
+								<p class="fragment">
+									Some async action? Use a thunk or saga
+								</p>
+							</div>
+							<img class="fragment" src="assets/thisisfine.gif" />
+						</div>
+					</section>
+        </section>
+				<section>
+					<section>
+						<h3>Types of state</h3>
+					</section>
+					<section>
+						<h4>Local state</h4>
+						<p class="fragment">
+							State that is only relevant to a single component
+						</p>
+						<p class="fragment" style="font-size: 0.8em;">
+							(this can also be shared within a tree of components)
+						</p>
+					</section>
+					<section>
+						<div data-markdown>
+              <textarea data-template data-line-numbers>
+								```tsx []
+								function Parent {
+									const [count] = useState(0);
+									return (
+										<Child count={count} />
+									);
+								};
+
+								function Child({ count }) {
+									return (
+										<div>
+											<p>{count}</p>
+										</div>
+									)
+								}
+								```
+							</textarea>
+            </div>
+						<aside class="notes">
+							At some point we keep lifting state up and up and up until we think the whole app needs it
+						</aside>
+					</section>
+					<section>
+						<h4>Global state</h4>
+						<p class="fragment">
+							State that is shared across the entire app
+						</p>
+					</section>
+					<section>
+						<h4>Network state</h4>
+						<p class="fragment">
+							Data that we fetch from the network
+						</p>
+					</section>
+					<section>
+						<h4>Form state</h4>
+						<p class="fragment">
+							Where we store everything related to a single form
+						</p>
+						<p class="fragment fade-in-then-semi-out">
+							Input values
+						</p>
+						<p class="fragment fade-in-then-semi-out">
+							Validation functions
+						</p>
+						<p class="fragment fade-in-then-semi-out">
+							Form errors
+						</p>
+					</section>
+					<section>
+						<h4>URL state</h4>
+						<p class="fragment">
+							State that you want to persist as part of the URL
+						</p>
+						<p class="fragment fade-in-then-semi-out">
+							Applied filters
+						</p>
+						<p class="fragment fade-in-then-semi-out">
+							Current page
+						</p>
+						<p class="fragment fade-in-then-semi-out">
+							Sorting
+						</p>
+						<p>
+							https://www.patagonia.com/search/black/?cgid=root&prefn1=fit&prefv1=slim%7Cregular&index=0&page=2
+						</p>
+						<p>Regular or slim fit, black color, page 2</p>
+					</section>
+					<section>
+						<p style="font-size: 0.8em;">
+							honorable mention
+						</p>
+						<h4>State machines</h4>
+						<p class="fragment">
+							Useful for predictable state changes with finite states
+						</p>
+					</section>
+				</section>
+        <section>
+          <section>
+						<h3>Built-in state management</h3>
+					</section>
+					<section>
+						<p><code>useState</code></p>
+						<p><code>useReducer</code></p>
+						<p><code>useContext</code></p>
+					</section>
+					<section>
+						<p><code>useState</code></p>
+					</section>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
 </html>
