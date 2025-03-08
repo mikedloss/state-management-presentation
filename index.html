@@ -23,6 +23,7 @@
           <h3>Frontend State Management</h3>
           <p>working title</p>
         </section>
+        <!-- What is state? -->
         <section>
           <section>
             <h3>What state is</h3>
@@ -49,9 +50,7 @@
           </section>
           <section>
             <h3>What state isn't</h3>
-            <div class="fragment">
-              Does it remain unchanged over time?
-            </div>
+            <div class="fragment">Does it remain unchanged over time?</div>
             <div class="fragment">
               Is it passed in from a parent component?
               <aside class="notes">
@@ -129,66 +128,79 @@
 									)
 								}
 								```
-							</textarea>
+							</textarea
+              >
             </div>
           </section>
-          <section>
+          <!-- <section>
             <h3>Where should it go?</h3>
-          </section>
+          </section> -->
         </section>
+        <!-- Evolution of state -->
         <section>
           <section>
             <h3>Evolution</h3>
           </section>
           <section>
-            <p>
-              Class components had <code>this.state</code> and <code>this.setState</code>
-            </p>
-						<p>this was fine until our apps grew and got more complex</p>
+            <p><code>this.state</code> and <code>this.setState</code></p>
+            <aside class="notes">
+              Class components were fine using this.state and this.setState
+              until our apps grew and got more complex
+            </aside>
           </section>
-					<section>
+          <section>
             <h3>MVC -> Flux at Facebook</h3>
             <img class="fragment" src="assets/image2.png" />
+            <aside class="notes">
+              Facebook was using MVC but they wanted to make it easier to reason
+              about the state of the app. In 2015 Dan Abramov started working on
+              a new architecture called Flux, which turned into Redux
+            </aside>
           </section>
-					<section>
+          <section>
             <h3>Redux</h3>
             <p class="fragment">Single source of truth</p>
             <p class="fragment">Immutability</p>
             <p class="fragment">Predictable state changes through reducers</p>
+            <aside class="notes">
+              Redux is a state management library that is a single source of
+              truth for the state of the app. It's built with immutability in
+              mind and predictability in mind through actions and reducers.
+            </aside>
           </section>
-					<section>
+          <section>
             <h3>Too much?</h3>
-						<div class="r-stack">
-							<div>
-								<p class="fragment">
-									Form state? Put it in the Redux store
-								</p>
-								<p class="fragment">
-									API data? Put it in the Redux store
-								</p>
-								<p class="fragment">
-									Some async action? Use a thunk or saga
-								</p>
-							</div>
-							<img class="fragment" src="assets/thisisfine.gif" />
-						</div>
-					</section>
+            <div class="r-stack">
+              <div>
+                <p class="fragment">Form state? Put it in the Redux store</p>
+                <p class="fragment">API data? Put it in the Redux store</p>
+                <p class="fragment">Some async action? Use a thunk or saga</p>
+              </div>
+              <img class="fragment" src="assets/thisisfine.gif" />
+            </div>
+            <aside class="notes">
+              When did it become too much? That's when we started thinking about
+              different types of state, and maybe there are better ways to
+              manage each type.
+            </aside>
+          </section>
         </section>
-				<section>
-					<section>
-						<h3>Types of state</h3>
-					</section>
-					<section>
-						<h4>Local state</h4>
-						<p class="fragment">
-							State that is only relevant to a single component
-						</p>
-						<p class="fragment" style="font-size: 0.8em;">
-							(this can also be shared within a tree of components)
-						</p>
-					</section>
-					<section>
-						<div data-markdown>
+        <!-- Types of state -->
+        <section>
+          <section>
+            <h3>Types of state</h3>
+          </section>
+          <section>
+            <h4>Local state</h4>
+            <p class="fragment">
+              State that is only relevant to a single component
+            </p>
+            <p class="fragment" style="font-size: 0.8em">
+              (this can also be shared within a tree of components)
+            </p>
+          </section>
+          <section>
+            <div data-markdown>
               <textarea data-template data-line-numbers>
 								```tsx []
 								function Parent {
@@ -206,80 +218,380 @@
 									)
 								}
 								```
-							</textarea>
+							</textarea
+              >
             </div>
+            <aside class="notes">
+              At some point we keep lifting state up and up and up until we
+              think the whole app needs it
+            </aside>
+          </section>
+          <section>
+            <h4>Global state</h4>
+            <p class="fragment">State that is shared across the entire app</p>
+            <aside class="notes">
+              Global state is what we consider when we need to share state
+              between many components without the need of prop drilling.
+            </aside>
+          </section>
+          <section>
+            <div data-markdown>
+              <textarea data-template data-line-numbers>
+								```tsx [|2|5,12|7-11|15-21|16,19]
+								import { createContext } from 'react';
+								const SomeContext = createContext();
+
+								const ParentPage = () => (
+									<SomeContext.Provider value="hello world!">
+										<h1>Parent page title</h1>
+										<Child1>
+											<Child2>
+												<Child3 />
+											</Child2>
+										</Child1>
+									</SomeContext.Provider>
+								);
+
+								const Child3 = () => {
+									const value = useContext(SomeContext);
+								
+									return (
+										<p>value: {value}</p>
+									);
+								};
+								```
+							</textarea
+              >
+              <aside class="notes">
+                In this example we use React Context to share state from a
+                parent component to a deeply nested child component.
+              </aside>
+            </div>
+          </section>
+          <section>
+            <h4>Server state</h4>
+            <p class="fragment">Data that we fetch from a server</p>
+            <aside class="notes">
+              Server state is the data that we fetch from an external API, that
+              we need to store and use in an application.
+            </aside>
+          </section>
+          <section>
+            <h4>Form state</h4>
+            <p>Where we store everything related to a single form</p>
+            <p class="fragment fade-in-then-semi-out">Input values</p>
+            <p class="fragment fade-in-then-semi-out">Validation functions</p>
+            <p class="fragment fade-in-then-semi-out">Form errors</p>
+            <aside class="notes">
+              Form state is the data that we collect from a form. We can store
+              things like input values, validation functions, and form errors.
+              We want to keep this local to the form itself, rather than
+              *somewhere else*
+            </aside>
+          </section>
+          <section>
+            <h4>URL state</h4>
+            <p class="fragment">
+              State that you want to persist as part of the URL
+            </p>
+            <p class="fragment fade-in-then-semi-out">Applied filters</p>
+            <p class="fragment fade-in-then-semi-out">Current page</p>
+            <p class="fragment fade-in-then-semi-out">Sorting</p>
+            <aside class="notes">
+              URL state is useful when we want to persist the state of an
+              application in the URL. It allows users to save the URL to visit
+              again later, or to share with other people. Some examples of
+              useful state in the URL are applied filters, current page, and
+              sorting.
+            </aside>
+          </section>
+          <section>
+            <a
+              href="https://www.patagonia.com/search/black/?cgid=root&prefn1=fit&prefv1=slim%7Cregular&index=0&page=2"
+              target="_blank"
+              style="word-wrap: break-word"
+            >
+              https://www.patagonia.com/search/black/cgid=root&prefn1=fit&prefv1=slim%7Cregular&index=0&page=2
+            </a>
+            <p class="fragment">Regular or slim fit, black color, page 2</p>
+            <aside class="notes">
+              Notice here that when we visit this URL, we will already have some
+              filters applied. Shopping pages are great examples of this.
+            </aside>
+          </section>
+          <!-- <section>
+            <p style="font-size: 0.8em">honorable mention</p>
+            <h4>State machines</h4>
+            <p class="fragment">
+              Useful for predictable state changes with finite states
+            </p>
 						<aside class="notes">
-							At some point we keep lifting state up and up and up until we think the whole app needs it
+							While note necessarily a 
 						</aside>
-					</section>
-					<section>
-						<h4>Global state</h4>
-						<p class="fragment">
-							State that is shared across the entire app
-						</p>
-					</section>
-					<section>
-						<h4>Network state</h4>
-						<p class="fragment">
-							Data that we fetch from the network
-						</p>
-					</section>
-					<section>
-						<h4>Form state</h4>
-						<p class="fragment">
-							Where we store everything related to a single form
-						</p>
-						<p class="fragment fade-in-then-semi-out">
-							Input values
-						</p>
-						<p class="fragment fade-in-then-semi-out">
-							Validation functions
-						</p>
-						<p class="fragment fade-in-then-semi-out">
-							Form errors
-						</p>
-					</section>
-					<section>
-						<h4>URL state</h4>
-						<p class="fragment">
-							State that you want to persist as part of the URL
-						</p>
-						<p class="fragment fade-in-then-semi-out">
-							Applied filters
-						</p>
-						<p class="fragment fade-in-then-semi-out">
-							Current page
-						</p>
-						<p class="fragment fade-in-then-semi-out">
-							Sorting
-						</p>
-						<p>
-							https://www.patagonia.com/search/black/?cgid=root&prefn1=fit&prefv1=slim%7Cregular&index=0&page=2
-						</p>
-						<p>Regular or slim fit, black color, page 2</p>
-					</section>
-					<section>
-						<p style="font-size: 0.8em;">
-							honorable mention
-						</p>
-						<h4>State machines</h4>
-						<p class="fragment">
-							Useful for predictable state changes with finite states
-						</p>
-					</section>
-				</section>
+          </section> -->
+        </section>
+        <!-- State management tools -->
+        <section>
+          <h3>State management tools</h3>
+          <h5 class="fragment">React state management</h5>
+          <h5 class="fragment">Third party state management</h5>
+          <aside class="notes">
+            Let's take a look at some of the tools that are available to us
+            today
+          </aside>
+        </section>
+        <!-- Built-in state management in React -->
         <section>
           <section>
-						<h3>Built-in state management</h3>
-					</section>
-					<section>
-						<p><code>useState</code></p>
-						<p><code>useReducer</code></p>
-						<p><code>useContext</code></p>
-					</section>
-					<section>
-						<p><code>useState</code></p>
-					</section>
+            <h3>Built-in state management in React</h3>
+          </section>
+          <section>
+            <p><code>useState</code></p>
+            <p><code>useReducer</code></p>
+            <p><code>useContext</code></p>
+          </section>
+        </section>
+        <!-- useState -->
+        <section>
+          <p><code>useState</code></p>
+          <section>
+            The most basic form of state management in React
+            <aside class="notes">
+              useState is a hook that allows us to manage the state of a
+              component. It's the simplest way to manage state today.
+            </aside>
+          </section>
+          <section>
+            <div data-markdown>
+              <textarea data-template data-line-numbers>
+									```tsx [|2|3-5,9|]
+									function Component() {
+										const [count, setCount] = useState(0);
+										const handleIncrement = () => {
+											setCount(prev => prev + 1)
+										}
+										return (
+											<div>
+												<p>{count}</p>
+												<button onClick={handleIncrement}>+1</button>
+											</div>
+										);
+									}
+									```
+								</textarea
+              >
+            </div>
+            <aside class="notes">
+              In this example, we create a `count` state variable and, when the
+              button is clicked, we call the `setCount` function to update the
+              state. which causes React to re-render the component with the new
+              state.
+            </aside>
+          </section>
+          <section>
+            <p>tricks + gotchas</p>
+          </section>
+          <section>
+            <p>Functional updater</p>
+            <aside class="notes">
+              The functional updater is a way to update the state based on the
+              previous state. Because of how React batches state updates, we can
+              use this functional updater to refer to the previous state to
+              derive the new state. DEMO HERE!
+            </aside>
+          </section>
+          <section>
+            <p>Putting props in state</p>
+            <p class="fragment">
+              The initial value is always discarded on re-renders
+            </p>
+            <aside class="notes">
+              We can pass a prop into state, but you need to remember that the
+              initial value matters most when the component first mounts, not on
+              subsequent renders. DEMO HERE!
+            </aside>
+          </section>
+          <section>
+            <p>Lazy initializer</p>
+            <div data-markdown>
+              <textarea data-template data-line-numbers>
+								```tsx []
+// ❌ will be computed on every component render
+const [value, setValue] = React.useState(
+  calculateExpensiveInitialValue(props)
+)
+
+// ✅ function is only called once
+const [value, setValue] = React.useState(() =>
+  calculateExpensiveInitialValue(props)
+)
+              </textarea>
+            </div>
+            <aside class="notes">
+              React only uses the initial value once. If we use an external
+              function to calculate something, we can store this in state but
+              use the functional updater so the function doesn't keep getting
+              called whenever the component updates through subsequent renders.
+            </aside>
+          </section>
+        </section>
+        <!-- useReducer -->
+        <section>
+          <p><code>useReducer</code></p>
+          <section>
+            The slightly more elevated <code>useState</code>
+            <aside class="notes">
+              useReducer is another form of state management that can allow us
+              to manage more complex state. It works very similar to Redux, can
+              do what useState does and more, but sometimes it's a little too
+              extra for what you're building
+            </aside>
+          </section>
+          <section>
+            <div data-markdown>
+              <textarea data-template data-line-numbers>
+                  ```tsx []
+                  function reducer(state, action) {
+                    switch (action.type) {
+                      case 'increment':
+                        return { ...state, count: state.count + 1 };
+                      case 'decrement':
+                        return { ...state, count: state.count - 1 };
+                    }
+                    throw Error('Unknown action');
+                  }
+  
+                  const initialState = { count: 0 };
+  
+                  function Counter() {
+                    const [state, dispatch] = useReducer(reducer, initialState);
+                    const handleIncrement = () => {
+                      dispatch({ type: 'increment' });
+                    }
+                    const handleDecrement = () => {
+                      dispatch({ type: 'decrement' });
+                    }
+                    return (
+                      <div>
+                        <p>{state.count}</p>
+                        <button onClick={handleIncrement}>+1</button>
+                        <button onClick={handleDecrement}>-1</button>
+                      </div>
+                    );
+                  }
+                  ```
+                </textarea
+              >
+            </div>
+          </section>
+        </section>
+        <!-- useContext -->
+        <section>
+          <p><code>useContext</code></p>
+          <section>
+            <p>The closest thing to global state in React</p>
+            <aside class="notes">
+              Context lets the parent component make some information available
+              to any component in the tree below it, no matter how deep, without
+              passing it explicitly through props. Useful for things like theme
+              and authentication.
+            </aside>
+          </section>
+          <section>
+            <div data-markdown class="smaller">
+              <textarea data-template data-line-numbers>
+                  ```tsx [|1|5-7|21,31|23,33|]
+                  const ThemeContext = createContext(null);
+  
+                  function App() {
+                    return (
+                      <ThemeContext.Provider value="dark">
+                        <Form />
+                      </ThemeContext.Provider>
+                    )
+                  }
+  
+                  function Form() {
+                    return (
+                      <Panel title="Welcome">
+                        <Button>Sign up</Button>
+                        <Button>Log in</Button>
+                      </Panel>
+                    );
+                  }
+  
+                  function Panel({ title, children }) {
+                    const theme = useContext(ThemeContext);
+                    return (
+                      <section className={`panel-${theme}`}>
+                        <h1>{title}</h1>
+                        {children}
+                      </section>
+                    )
+                  }
+  
+                  function Button({ children }) {
+                    const theme = useContext(ThemeContext);
+                    return (
+                      <button className={`button-${theme}`}>
+                        {children}
+                      </button>
+                    );
+                  }
+                  ```
+                </textarea
+              >
+            </div>
+          </section>
+          <section>
+            <p>tricks + gotchas</p>
+            <aside class="notes">
+              Context is a great way to share state between components, but
+              there's a way to make it better and something to always watch out
+              for
+            </aside>
+          </section>
+          <section>
+            <p>Making Context fail loudly</p>
+            <aside class="notes">
+              Context requires a provider to be used and you can only use it in
+              a child component of that provider. If you try to use it in a
+              component that is not a child of the provider, it will throw an
+              error. DEMO TIME!
+            </aside>
+          </section>
+          <section>
+            <p>
+              If context updates, all of the children that use it will re-render
+            </p>
+            <aside class="notes">
+              This is the biggest gotcha with context. Stacking providers in
+              your root app make can over time make your app very slow to
+              respond for users. DEMO TIME!
+            </aside>
+          </section>
+        </section>
+        <section>
+          dq
+          <h4>Third party tools</h4>
+          <aside class="notes">
+            React can handle most of these different types of state relatively
+            easily, but there are other tools that can help us manage state more
+            efficiently, especially when dealing with loading and error states
+            or manipulating the URL
+          </aside>
+        </section>
+        <section>
+          <h4>Zustand</h4>
+          <section>
+            <p>Like Redux but no providers</p>
+            <aside class="notes">
+              Zustand is a state management library that is a bit more
+              opinionated than React's built-in state management. It's a bit
+              more opinionated and has a few more features that make it easier
+              to manage state in a larger application.
+            </aside>
+          </section>
         </section>
       </div>
     </div>
@@ -294,6 +606,7 @@
       // - https://revealjs.com/config/
       Reveal.initialize({
         hash: true,
+        slideNumber: true,
         // Learn about plugins: https://revealjs.com/plugins/
         plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
       });

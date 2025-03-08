@@ -818,6 +818,11 @@ section.has-light-background, section.has-light-background h1, section.has-light
   display: block;
 }
 
+.smaller {
+  font-size: 0.65em;
+  line-height: 1.4;
+}
+
 .reveal pre code.jsx .hljs-tag .hljs-name, .reveal pre code.javascript .hljs-tag .hljs-name, .reveal pre code.js .hljs-tag .hljs-name {
   color: #f92672;
 }

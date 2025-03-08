@@ -313,6 +313,11 @@ $heading4Size: 1.0em;
   }
 }
 
+.smaller {
+  font-size: 0.65em;
+  line-height: 1.4;
+}
+
 // Fix for JSX in code blocks
 .reveal pre code {
   &.jsx, &.javascript, &.js {
@@ -324,5 +329,3 @@ $heading4Size: 1.0em;
     }
   }
 }
-
-
