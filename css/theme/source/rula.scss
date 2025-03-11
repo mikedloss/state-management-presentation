@@ -1,0 +1,331 @@
+/**
+ * Rula theme for reveal.js. This is the opposite of the 'white' theme.
+ *
+ * By Hakim El Hattab, http://hakim.se
+ */
+
+
+// Default mixins and settings -----------------
+@use "sass:color";
+@import "../template/mixins";
+@import "../template/settings";
+// ---------------------------------------------
+
+
+// Include theme-specific fonts
+@import url(./fonts/source-sans-pro/source-sans-pro.css);
+
+
+// Color Variables
+$fern-10: #f3faf0;
+$fern-20: #eaf5e4;
+$fern-30: #b8e3c0;
+$fern-40: #7cbc7f;
+$fern-50: #38663a;
+$fern-60: #1c331d;
+
+$sky-10: #f0faf9;
+$sky-20: #d9ebe9;
+$sky-30: #b7e2e0;
+$sky-40: #57afb0;
+$sky-50: #296662;
+$sky-60: #123331;
+
+$amethyst-10: #f2f2fc;
+$amethyst-20: #e4e4f9;
+$amethyst-30: #d7ccff;
+$amethyst-40: #997eff;
+$amethyst-50: #3e2e73;
+$amethyst-60: #1d1733;
+
+$amber-10: #fbf7f1;
+$amber-20: #fbeedb;
+$amber-30: #f1c5b1;
+$amber-40: #f2976f;
+$amber-50: #662714;
+$amber-60: #33140a;
+
+$red-10: #fae8e8;
+$red-50: #ce1d1d;
+
+$grey-50: #fafafa;
+$grey-100: #f4f5f6;
+$grey-150: #ebedf0;
+$grey-200: #e0e2e6;
+$grey-300: #c1c5cd;
+$grey-400: #969aa0;
+$grey-450: #82848a;
+$grey-500: #6a6c71;
+$grey-600: #56575b;
+$grey-700: #3f4146;
+$grey-800: #26272a;
+$grey-900: #15171a;
+
+$cream-primitive: #edeae4;
+$cream-50: #f7f5f3;
+$cream-100: #f8f5ef;
+$cream-200: #e1ddd6;
+$cream-300: #d3d0ca;
+
+$forest: #354535;
+$white: #ffffff;
+
+// Override theme settings (see ../template/settings.scss)
+$backgroundColor: #e4f0ee;
+
+$mainColor: #1e321e;
+$headingColor: #1e321e;
+
+$mainFontSize: 42px;
+$mainFont: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+$headingFont: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+$headingTextShadow: none;
+$headingLetterSpacing: normal;
+$headingTextTransform: none;
+$headingFontWeight: 600;
+$linkColor: #42affa;
+$linkColorHover: color.scale( $linkColor, $lightness: 15% );
+$selectionBackgroundColor: rgba( $linkColor, 0.75 );
+
+$heading1Size: 2.5em;
+$heading2Size: 1.6em;
+$heading3Size: 1.3em;
+$heading4Size: 1.0em;
+
+// Change text colors against light slide backgrounds
+@include light-bg-text-color(#222);
+
+
+// Theme template ------------------------------
+@import "../template/theme";
+// ---------------------------------------------
+
+// Helper function to determine text color based on background color
+@function get-contrast-color($color) {
+  $luminance: (0.299 * red($color) + 0.587 * green($color) + 0.114 * blue($color)) / 255;
+  @return if($luminance > 0.55, $mainColor, $white);
+}
+
+// Color Palette
+.fern {
+  &-10 { color: $fern-10; }
+  &-20 { color: $fern-20; }
+  &-30 { color: $fern-30; }
+  &-40 { color: $fern-40; }
+  &-50 { color: $fern-50; }
+  &-60 { color: $fern-60; }
+}
+
+.sky {
+  &-10 { color: $sky-10; }
+  &-20 { color: $sky-20; }
+  &-30 { color: $sky-30; }
+  &-40 { color: $sky-40; }
+  &-50 { color: $sky-50; }
+  &-60 { color: $sky-60; }
+}
+
+.amethyst {
+  &-10 { color: $amethyst-10; }
+  &-20 { color: $amethyst-20; }
+  &-30 { color: $amethyst-30; }
+  &-40 { color: $amethyst-40; }
+  &-50 { color: $amethyst-50; }
+  &-60 { color: $amethyst-60; }
+}
+
+.amber {
+  &-10 { color: $amber-10; }
+  &-20 { color: $amber-20; }
+  &-30 { color: $amber-30; }
+  &-40 { color: $amber-40; }
+  &-50 { color: $amber-50; }
+  &-60 { color: $amber-60; }
+}
+
+.red {
+  &-10 { color: $red-10; }
+  &-50 { color: $red-50; }
+}
+
+.grey {
+  &-50  { color: $grey-50; }
+  &-100 { color: $grey-100; }
+  &-150 { color: $grey-150; }
+  &-200 { color: $grey-200; }
+  &-300 { color: $grey-300; }
+  &-400 { color: $grey-400; }
+  &-450 { color: $grey-450; }
+  &-500 { color: $grey-500; }
+  &-600 { color: $grey-600; }
+  &-700 { color: $grey-700; }
+  &-800 { color: $grey-800; }
+  &-900 { color: $grey-900; }
+}
+
+.cream {
+  &-primitive { color: $cream-primitive; }
+  &-50  { color: $cream-50; }
+  &-100 { color: $cream-100; }
+  &-200 { color: $cream-200; }
+  &-300 { color: $cream-300; }
+}
+
+// Misc Colors
+.forest { color: $forest; }
+.white { color: $white; }
+
+// Background color classes with automatic text contrast
+// Apply common styles to all highlight-* classes
+[class^="highlight-"] {
+  padding: 0px 8px;
+  border-radius: 4px;
+}
+
+.highlight {
+  &-fern {
+    &-10 { background-color: $fern-10; color: get-contrast-color($fern-10); }
+    &-20 { background-color: $fern-20; color: get-contrast-color($fern-20); }
+    &-30 { background-color: $fern-30; color: get-contrast-color($fern-30); }
+    &-40 { background-color: $fern-40; color: get-contrast-color($fern-40); }
+    &-50 { background-color: $fern-50; color: get-contrast-color($fern-50); }
+    &-60 { background-color: $fern-60; color: get-contrast-color($fern-60); }
+  }
+
+  &-sky {
+    &-10 { background-color: $sky-10; color: get-contrast-color($sky-10); }
+    &-20 { background-color: $sky-20; color: get-contrast-color($sky-20); }
+    &-30 { background-color: $sky-30; color: get-contrast-color($sky-30); }
+    &-40 { background-color: $sky-40; color: get-contrast-color($sky-40); }
+    &-50 { background-color: $sky-50; color: get-contrast-color($sky-50); }
+    &-60 { background-color: $sky-60; color: get-contrast-color($sky-60); }
+  }
+
+  &-amethyst {
+    &-10 { background-color: $amethyst-10; color: get-contrast-color($amethyst-10); }
+    &-20 { background-color: $amethyst-20; color: get-contrast-color($amethyst-20); }
+    &-30 { background-color: $amethyst-30; color: get-contrast-color($amethyst-30); }
+    &-40 { background-color: $amethyst-40; color: get-contrast-color($amethyst-40); }
+    &-50 { background-color: $amethyst-50; color: get-contrast-color($amethyst-50); }
+    &-60 { background-color: $amethyst-60; color: get-contrast-color($amethyst-60); }
+  }
+
+  &-amber {
+    &-10 { background-color: $amber-10; color: get-contrast-color($amber-10); }
+    &-20 { background-color: $amber-20; color: get-contrast-color($amber-20); }
+    &-30 { background-color: $amber-30; color: get-contrast-color($amber-30); }
+    &-40 { background-color: $amber-40; color: get-contrast-color($amber-40); }
+    &-50 { background-color: $amber-50; color: get-contrast-color($amber-50); }
+    &-60 { background-color: $amber-60; color: get-contrast-color($amber-60); }
+  }
+
+  &-red {
+    &-10 { background-color: $red-10; color: get-contrast-color($red-10); }
+    &-50 { background-color: $red-50; color: get-contrast-color($red-50); }
+  }
+
+  &-grey {
+    &-50  { background-color: $grey-50; color: get-contrast-color($grey-50); }
+    &-100 { background-color: $grey-100; color: get-contrast-color($grey-100); }
+    &-150 { background-color: $grey-150; color: get-contrast-color($grey-150); }
+    &-200 { background-color: $grey-200; color: get-contrast-color($grey-200); }
+    &-300 { background-color: $grey-300; color: get-contrast-color($grey-300); }
+    &-400 { background-color: $grey-400; color: get-contrast-color($grey-400); }
+    &-450 { background-color: $grey-450; color: get-contrast-color($grey-450); }
+    &-500 { background-color: $grey-500; color: get-contrast-color($grey-500); }
+    &-600 { background-color: $grey-600; color: get-contrast-color($grey-600); }
+    &-700 { background-color: $grey-700; color: get-contrast-color($grey-700); }
+    &-800 { background-color: $grey-800; color: get-contrast-color($grey-800); }
+    &-900 { background-color: $grey-900; color: get-contrast-color($grey-900); }
+  }
+
+  &-cream {
+    &-primitive { background-color: $cream-primitive; color: get-contrast-color($cream-primitive); }
+    &-50  { background-color: $cream-50; color: get-contrast-color($cream-50); }
+    &-100 { background-color: $cream-100; color: get-contrast-color($cream-100); }
+    &-200 { background-color: $cream-200; color: get-contrast-color($cream-200); }
+    &-300 { background-color: $cream-300; color: get-contrast-color($cream-300); }
+  }
+
+  &-forest { background-color: $forest; color: get-contrast-color($forest); }
+  &-white { background-color: $white; color: get-contrast-color($white); }
+}
+
+// Alternative approach with explicit classes for better compatibility
+.bg-fern-10 { padding: 0px 8px; border-radius: 4px; background-color: $fern-10; color: get-contrast-color($fern-10); }
+.bg-fern-20 { padding: 0px 8px; border-radius: 4px; background-color: $fern-20; color: get-contrast-color($fern-20); }
+.bg-fern-30 { padding: 0px 8px; border-radius: 4px; background-color: $fern-30; color: get-contrast-color($fern-30); }
+.bg-fern-40 { padding: 0px 8px; border-radius: 4px; background-color: $fern-40; color: get-contrast-color($fern-40); }
+.bg-fern-50 { padding: 0px 8px; border-radius: 4px; background-color: $fern-50; color: get-contrast-color($fern-50); }
+.bg-fern-60 { padding: 0px 8px; border-radius: 4px; background-color: $fern-60; color: get-contrast-color($fern-60); }
+
+.bg-sky-10 { padding: 0px 8px; border-radius: 4px; background-color: $sky-10; color: get-contrast-color($sky-10); }
+.bg-sky-20 { padding: 0px 8px; border-radius: 4px; background-color: $sky-20; color: get-contrast-color($sky-20); }
+.bg-sky-30 { padding: 0px 8px; border-radius: 4px; background-color: $sky-30; color: get-contrast-color($sky-30); }
+.bg-sky-40 { padding: 0px 8px; border-radius: 4px; background-color: $sky-40; color: get-contrast-color($sky-40); }
+.bg-sky-50 { padding: 0px 8px; border-radius: 4px; background-color: $sky-50; color: get-contrast-color($sky-50); }
+.bg-sky-60 { padding: 0px 8px; border-radius: 4px; background-color: $sky-60; color: get-contrast-color($sky-60); }
+
+.bg-forest { padding: 0px 8px; border-radius: 4px; background-color: $forest; color: get-contrast-color($forest); }
+.bg-white { padding: 0px 8px; border-radius: 4px; background-color: $white; color: get-contrast-color($white); }
+
+// Code block styling
+.reveal {
+  pre {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0.5em auto;
+    max-width: 90%;
+    
+    code {
+      padding: 0.5em;
+      font-size: 0.8em;
+      line-height: 1.2;
+      max-height: none;
+      overflow: visible;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      
+      &.jsx {
+        .token.tag,
+        .token.punctuation {
+          color: #f92672;
+        }
+        
+        .token.attr-name {
+          color: #a6e22e;
+        }
+        
+        .token.attr-value {
+          color: #e6db74;
+        }
+      }
+    }
+    
+    code.smaller {
+      font-size: 0.65em;
+      line-height: 1.4;
+    }
+  }
+  
+  .slides section .fragment.current-visible.visible:not(.fade-out) {
+    display: block;
+  }
+}
+
+.smaller {
+  font-size: 0.65em;
+  line-height: 1.4;
+}
+
+// Fix for JSX in code blocks
+.reveal pre code {
+  &.jsx, &.javascript, &.js {
+    .hljs-tag .hljs-name {
+      color: #f92672;
+    }
+    .hljs-attr {
+      color: #a6e22e;
+    }
+  }
+}

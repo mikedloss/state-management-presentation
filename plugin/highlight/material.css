@@ -1,0 +1,121 @@
+/*
+Material Design theme for reveal.js highlight.js
+Created by Claude for state-management-presentation
+*/
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #263238; /* Material Blue Grey 900 */
+  color: #ECEFF1; /* Material Blue Grey 50 */
+}
+
+.hljs-tag,
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal,
+.hljs-strong,
+.hljs-name {
+  color: #F06292; /* Material Pink 300 */
+}
+
+.hljs-code {
+  color: #4DD0E1; /* Material Cyan 300 */
+}
+
+.hljs-class .hljs-title {
+  color: #FFECB3; /* Material Amber 100 */
+}
+
+.hljs-attribute,
+.hljs-symbol,
+.hljs-regexp,
+.hljs-link {
+  color: #BA68C8; /* Material Purple 300 */
+}
+
+.hljs-string,
+.hljs-bullet,
+.hljs-subst,
+.hljs-title,
+.hljs-section,
+.hljs-emphasis,
+.hljs-type,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-addition,
+.hljs-variable,
+.hljs-template-tag,
+.hljs-template-variable {
+  color: #81C784; /* Material Green 300 */
+}
+
+.hljs-comment,
+.hljs-quote,
+.hljs-deletion,
+.hljs-meta {
+  color: #78909C; /* Material Blue Grey 400 */
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal,
+.hljs-doctag,
+.hljs-title,
+.hljs-section,
+.hljs-type,
+.hljs-selector-id {
+  font-weight: bold;
+}
+
+/* JSX specific styling */
+.hljs.jsx .hljs-tag .hljs-name,
+.hljs.jsx .hljs-tag .hljs-punctuation {
+  color: #F06292; /* Material Pink 300 */
+}
+
+.hljs.jsx .hljs-attr-name {
+  color: #FFD54F; /* Material Amber 300 */
+}
+
+.hljs.jsx .hljs-attr-value {
+  color: #81C784; /* Material Green 300 */
+}
+
+/* JavaScript specific */
+.hljs.javascript .hljs-function,
+.hljs.js .hljs-function {
+  color: #4FC3F7; /* Material Light Blue 300 */
+}
+
+.hljs.javascript .hljs-params,
+.hljs.js .hljs-params {
+  color: #FFCC80; /* Material Orange 200 */
+}
+
+/* Numbers */
+.hljs-number {
+  color: #FF8A65; /* Material Deep Orange 300 */
+}
+
+/* Operators */
+.hljs-operator {
+  color: #B0BEC5; /* Material Blue Grey 200 */
+}
+
+/* Function names */
+.hljs-function .hljs-title {
+  color: #4FC3F7; /* Material Light Blue 300 */
+}
+
+/* React specific */
+.hljs-tag .hljs-attr {
+  color: #FFD54F; /* Material Amber 300 */
+}
+
+.hljs-tag .hljs-string {
+  color: #81C784; /* Material Green 300 */
+} 

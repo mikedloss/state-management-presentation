@@ -1,0 +1,831 @@
+/**
+ * Rula theme for reveal.js. This is the opposite of the 'white' theme.
+ *
+ * By Hakim El Hattab, http://hakim.se
+ */
+@import url(./fonts/source-sans-pro/source-sans-pro.css);
+section.has-light-background, section.has-light-background h1, section.has-light-background h2, section.has-light-background h3, section.has-light-background h4, section.has-light-background h5, section.has-light-background h6 {
+  color: #222;
+}
+
+/*********************************************
+ * GLOBAL STYLES
+ *********************************************/
+:root {
+  --r-background-color: #e4f0ee;
+  --r-main-font: ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  --r-main-font-size: 42px;
+  --r-main-color: #1e321e;
+  --r-block-margin: 20px;
+  --r-heading-margin: 0 0 20px 0;
+  --r-heading-font: ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  --r-heading-color: #1e321e;
+  --r-heading-line-height: 1.2;
+  --r-heading-letter-spacing: normal;
+  --r-heading-text-transform: none;
+  --r-heading-text-shadow: none;
+  --r-heading-font-weight: 600;
+  --r-heading1-text-shadow: none;
+  --r-heading1-size: 2.5em;
+  --r-heading2-size: 1.6em;
+  --r-heading3-size: 1.3em;
+  --r-heading4-size: 1em;
+  --r-code-font: monospace;
+  --r-link-color: #42affa;
+  --r-link-color-dark: rgb(19.8216494845, 155.4536082474, 248.7783505155);
+  --r-link-color-hover: rgb(94.35, 187, 250.75);
+  --r-selection-background-color: rgba(66, 175, 250, 0.75);
+  --r-selection-color: #fff;
+  --r-overlay-element-bg-color: 240, 240, 240;
+  --r-overlay-element-fg-color: 0, 0, 0;
+}
+
+.reveal-viewport {
+  background: #e4f0ee;
+  background-color: var(--r-background-color);
+}
+
+.reveal {
+  font-family: var(--r-main-font);
+  font-size: var(--r-main-font-size);
+  font-weight: normal;
+  color: var(--r-main-color);
+}
+
+.reveal ::selection {
+  color: var(--r-selection-color);
+  background: var(--r-selection-background-color);
+  text-shadow: none;
+}
+
+.reveal ::-moz-selection {
+  color: var(--r-selection-color);
+  background: var(--r-selection-background-color);
+  text-shadow: none;
+}
+
+.reveal .slides section,
+.reveal .slides section > section {
+  line-height: 1.3;
+  font-weight: inherit;
+}
+
+/*********************************************
+ * HEADERS
+ *********************************************/
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  margin: var(--r-heading-margin);
+  color: var(--r-heading-color);
+  font-family: var(--r-heading-font);
+  font-weight: var(--r-heading-font-weight);
+  line-height: var(--r-heading-line-height);
+  letter-spacing: var(--r-heading-letter-spacing);
+  text-transform: var(--r-heading-text-transform);
+  text-shadow: var(--r-heading-text-shadow);
+  word-wrap: break-word;
+}
+
+.reveal h1 {
+  font-size: var(--r-heading1-size);
+}
+
+.reveal h2 {
+  font-size: var(--r-heading2-size);
+}
+
+.reveal h3 {
+  font-size: var(--r-heading3-size);
+}
+
+.reveal h4 {
+  font-size: var(--r-heading4-size);
+}
+
+.reveal h1 {
+  text-shadow: var(--r-heading1-text-shadow);
+}
+
+/*********************************************
+ * OTHER
+ *********************************************/
+.reveal p {
+  margin: var(--r-block-margin) 0;
+  line-height: 1.3;
+}
+
+/* Remove trailing margins after titles */
+.reveal h1:last-child,
+.reveal h2:last-child,
+.reveal h3:last-child,
+.reveal h4:last-child,
+.reveal h5:last-child,
+.reveal h6:last-child {
+  margin-bottom: 0;
+}
+
+/* Ensure certain elements are never larger than the slide itself */
+.reveal img,
+.reveal video,
+.reveal iframe {
+  max-width: 95%;
+  max-height: 95%;
+}
+
+.reveal strong,
+.reveal b {
+  font-weight: bold;
+}
+
+.reveal em {
+  font-style: italic;
+}
+
+.reveal ol,
+.reveal dl,
+.reveal ul {
+  display: inline-block;
+  text-align: left;
+  margin: 0 0 0 1em;
+}
+
+.reveal ol {
+  list-style-type: decimal;
+}
+
+.reveal ul {
+  list-style-type: disc;
+}
+
+.reveal ul ul {
+  list-style-type: square;
+}
+
+.reveal ul ul ul {
+  list-style-type: circle;
+}
+
+.reveal ul ul,
+.reveal ul ol,
+.reveal ol ol,
+.reveal ol ul {
+  display: block;
+  margin-left: 40px;
+}
+
+.reveal dt {
+  font-weight: bold;
+}
+
+.reveal dd {
+  margin-left: 40px;
+}
+
+.reveal blockquote {
+  display: block;
+  position: relative;
+  width: 70%;
+  margin: var(--r-block-margin) auto;
+  padding: 5px;
+  font-style: italic;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
+}
+
+.reveal blockquote p:first-child,
+.reveal blockquote p:last-child {
+  display: inline-block;
+}
+
+.reveal q {
+  font-style: italic;
+}
+
+.reveal pre {
+  display: block;
+  position: relative;
+  width: 90%;
+  margin: var(--r-block-margin) auto;
+  text-align: left;
+  font-size: 0.55em;
+  font-family: var(--r-code-font);
+  line-height: 1.2em;
+  word-wrap: break-word;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.reveal code {
+  font-family: var(--r-code-font);
+  text-transform: none;
+  tab-size: 2;
+}
+
+.reveal pre code {
+  display: block;
+  padding: 5px;
+  overflow: auto;
+  max-height: 400px;
+  word-wrap: normal;
+}
+
+.reveal .code-wrapper {
+  white-space: normal;
+}
+
+.reveal .code-wrapper code {
+  white-space: pre;
+}
+
+.reveal table {
+  margin: auto;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.reveal table th {
+  font-weight: bold;
+}
+
+.reveal table th,
+.reveal table td {
+  text-align: left;
+  padding: 0.2em 0.5em 0.2em 0.5em;
+  border-bottom: 1px solid;
+}
+
+.reveal table th[align=center],
+.reveal table td[align=center] {
+  text-align: center;
+}
+
+.reveal table th[align=right],
+.reveal table td[align=right] {
+  text-align: right;
+}
+
+.reveal table tbody tr:last-child th,
+.reveal table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.reveal sup {
+  vertical-align: super;
+  font-size: smaller;
+}
+
+.reveal sub {
+  vertical-align: sub;
+  font-size: smaller;
+}
+
+.reveal small {
+  display: inline-block;
+  font-size: 0.6em;
+  line-height: 1.2em;
+  vertical-align: top;
+}
+
+.reveal small * {
+  vertical-align: top;
+}
+
+.reveal img {
+  margin: var(--r-block-margin) 0;
+}
+
+/*********************************************
+ * LINKS
+ *********************************************/
+.reveal a {
+  color: var(--r-link-color);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.reveal a:hover {
+  color: var(--r-link-color-hover);
+  text-shadow: none;
+  border: none;
+}
+
+.reveal .roll span:after {
+  color: #fff;
+  background: var(--r-link-color-dark);
+}
+
+/*********************************************
+ * Frame helper
+ *********************************************/
+.reveal .r-frame {
+  border: 4px solid var(--r-main-color);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+.reveal a .r-frame {
+  transition: all 0.15s linear;
+}
+
+.reveal a:hover .r-frame {
+  border-color: var(--r-link-color);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.55);
+}
+
+/*********************************************
+ * NAVIGATION CONTROLS
+ *********************************************/
+.reveal .controls {
+  color: var(--r-link-color);
+}
+
+/*********************************************
+ * PROGRESS BAR
+ *********************************************/
+.reveal .progress {
+  background: rgba(0, 0, 0, 0.2);
+  color: var(--r-link-color);
+}
+
+/*********************************************
+ * PRINT BACKGROUND
+ *********************************************/
+@media print {
+  .backgrounds {
+    background-color: var(--r-background-color);
+  }
+}
+.fern-10 {
+  color: #f3faf0;
+}
+.fern-20 {
+  color: #eaf5e4;
+}
+.fern-30 {
+  color: #b8e3c0;
+}
+.fern-40 {
+  color: #7cbc7f;
+}
+.fern-50 {
+  color: #38663a;
+}
+.fern-60 {
+  color: #1c331d;
+}
+
+.sky-10 {
+  color: #f0faf9;
+}
+.sky-20 {
+  color: #d9ebe9;
+}
+.sky-30 {
+  color: #b7e2e0;
+}
+.sky-40 {
+  color: #57afb0;
+}
+.sky-50 {
+  color: #296662;
+}
+.sky-60 {
+  color: #123331;
+}
+
+.amethyst-10 {
+  color: #f2f2fc;
+}
+.amethyst-20 {
+  color: #e4e4f9;
+}
+.amethyst-30 {
+  color: #d7ccff;
+}
+.amethyst-40 {
+  color: #997eff;
+}
+.amethyst-50 {
+  color: #3e2e73;
+}
+.amethyst-60 {
+  color: #1d1733;
+}
+
+.amber-10 {
+  color: #fbf7f1;
+}
+.amber-20 {
+  color: #fbeedb;
+}
+.amber-30 {
+  color: #f1c5b1;
+}
+.amber-40 {
+  color: #f2976f;
+}
+.amber-50 {
+  color: #662714;
+}
+.amber-60 {
+  color: #33140a;
+}
+
+.red-10 {
+  color: #fae8e8;
+}
+.red-50 {
+  color: #ce1d1d;
+}
+
+.grey-50 {
+  color: #fafafa;
+}
+.grey-100 {
+  color: #f4f5f6;
+}
+.grey-150 {
+  color: #ebedf0;
+}
+.grey-200 {
+  color: #e0e2e6;
+}
+.grey-300 {
+  color: #c1c5cd;
+}
+.grey-400 {
+  color: #969aa0;
+}
+.grey-450 {
+  color: #82848a;
+}
+.grey-500 {
+  color: #6a6c71;
+}
+.grey-600 {
+  color: #56575b;
+}
+.grey-700 {
+  color: #3f4146;
+}
+.grey-800 {
+  color: #26272a;
+}
+.grey-900 {
+  color: #15171a;
+}
+
+.cream-primitive {
+  color: #edeae4;
+}
+.cream-50 {
+  color: #f7f5f3;
+}
+.cream-100 {
+  color: #f8f5ef;
+}
+.cream-200 {
+  color: #e1ddd6;
+}
+.cream-300 {
+  color: #d3d0ca;
+}
+
+.forest {
+  color: #354535;
+}
+
+.white {
+  color: #ffffff;
+}
+
+[class^=highlight-] {
+  padding: 0px 8px;
+  border-radius: 4px;
+}
+
+.highlight-fern-10 {
+  background-color: #f3faf0;
+  color: #1e321e;
+}
+.highlight-fern-20 {
+  background-color: #eaf5e4;
+  color: #1e321e;
+}
+.highlight-fern-30 {
+  background-color: #b8e3c0;
+  color: #1e321e;
+}
+.highlight-fern-40 {
+  background-color: #7cbc7f;
+  color: #1e321e;
+}
+.highlight-fern-50 {
+  background-color: #38663a;
+  color: #ffffff;
+}
+.highlight-fern-60 {
+  background-color: #1c331d;
+  color: #ffffff;
+}
+.highlight-sky-10 {
+  background-color: #f0faf9;
+  color: #1e321e;
+}
+.highlight-sky-20 {
+  background-color: #d9ebe9;
+  color: #1e321e;
+}
+.highlight-sky-30 {
+  background-color: #b7e2e0;
+  color: #1e321e;
+}
+.highlight-sky-40 {
+  background-color: #57afb0;
+  color: #1e321e;
+}
+.highlight-sky-50 {
+  background-color: #296662;
+  color: #ffffff;
+}
+.highlight-sky-60 {
+  background-color: #123331;
+  color: #ffffff;
+}
+.highlight-amethyst-10 {
+  background-color: #f2f2fc;
+  color: #1e321e;
+}
+.highlight-amethyst-20 {
+  background-color: #e4e4f9;
+  color: #1e321e;
+}
+.highlight-amethyst-30 {
+  background-color: #d7ccff;
+  color: #1e321e;
+}
+.highlight-amethyst-40 {
+  background-color: #997eff;
+  color: #1e321e;
+}
+.highlight-amethyst-50 {
+  background-color: #3e2e73;
+  color: #ffffff;
+}
+.highlight-amethyst-60 {
+  background-color: #1d1733;
+  color: #ffffff;
+}
+.highlight-amber-10 {
+  background-color: #fbf7f1;
+  color: #1e321e;
+}
+.highlight-amber-20 {
+  background-color: #fbeedb;
+  color: #1e321e;
+}
+.highlight-amber-30 {
+  background-color: #f1c5b1;
+  color: #1e321e;
+}
+.highlight-amber-40 {
+  background-color: #f2976f;
+  color: #1e321e;
+}
+.highlight-amber-50 {
+  background-color: #662714;
+  color: #ffffff;
+}
+.highlight-amber-60 {
+  background-color: #33140a;
+  color: #ffffff;
+}
+.highlight-red-10 {
+  background-color: #fae8e8;
+  color: #1e321e;
+}
+.highlight-red-50 {
+  background-color: #ce1d1d;
+  color: #ffffff;
+}
+.highlight-grey-50 {
+  background-color: #fafafa;
+  color: #1e321e;
+}
+.highlight-grey-100 {
+  background-color: #f4f5f6;
+  color: #1e321e;
+}
+.highlight-grey-150 {
+  background-color: #ebedf0;
+  color: #1e321e;
+}
+.highlight-grey-200 {
+  background-color: #e0e2e6;
+  color: #1e321e;
+}
+.highlight-grey-300 {
+  background-color: #c1c5cd;
+  color: #1e321e;
+}
+.highlight-grey-400 {
+  background-color: #969aa0;
+  color: #1e321e;
+}
+.highlight-grey-450 {
+  background-color: #82848a;
+  color: #ffffff;
+}
+.highlight-grey-500 {
+  background-color: #6a6c71;
+  color: #ffffff;
+}
+.highlight-grey-600 {
+  background-color: #56575b;
+  color: #ffffff;
+}
+.highlight-grey-700 {
+  background-color: #3f4146;
+  color: #ffffff;
+}
+.highlight-grey-800 {
+  background-color: #26272a;
+  color: #ffffff;
+}
+.highlight-grey-900 {
+  background-color: #15171a;
+  color: #ffffff;
+}
+.highlight-cream-primitive {
+  background-color: #edeae4;
+  color: #1e321e;
+}
+.highlight-cream-50 {
+  background-color: #f7f5f3;
+  color: #1e321e;
+}
+.highlight-cream-100 {
+  background-color: #f8f5ef;
+  color: #1e321e;
+}
+.highlight-cream-200 {
+  background-color: #e1ddd6;
+  color: #1e321e;
+}
+.highlight-cream-300 {
+  background-color: #d3d0ca;
+  color: #1e321e;
+}
+.highlight-forest {
+  background-color: #354535;
+  color: #ffffff;
+}
+.highlight-white {
+  background-color: #ffffff;
+  color: #1e321e;
+}
+
+.bg-fern-10 {
+  padding: 0px 8px;
+  border-radius: 4px;
+  background-color: #f3faf0;
+  color: #1e321e;
+}
+
+.bg-fern-20 {
+  padding: 0px 8px;
+  border-radius: 4px;
+  background-color: #eaf5e4;
+  color: #1e321e;
+}
+
+.bg-fern-30 {
+  padding: 0px 8px;
+  border-radius: 4px;
+  background-color: #b8e3c0;
+  color: #1e321e;
+}
+
+.bg-fern-40 {
+  padding: 0px 8px;
+  border-radius: 4px;
+  background-color: #7cbc7f;
+  color: #1e321e;
+}
+
+.bg-fern-50 {
+  padding: 0px 8px;
+  border-radius: 4px;
+  background-color: #38663a;
+  color: #ffffff;
+}
+
+.bg-fern-60 {
+  padding: 0px 8px;
+  border-radius: 4px;
+  background-color: #1c331d;
+  color: #ffffff;
+}
+
+.bg-sky-10 {
+  padding: 0px 8px;
+  border-radius: 4px;
+  background-color: #f0faf9;
+  color: #1e321e;
+}
+
+.bg-sky-20 {
+  padding: 0px 8px;
+  border-radius: 4px;
+  background-color: #d9ebe9;
+  color: #1e321e;
+}
+
+.bg-sky-30 {
+  padding: 0px 8px;
+  border-radius: 4px;
+  background-color: #b7e2e0;
+  color: #1e321e;
+}
+
+.bg-sky-40 {
+  padding: 0px 8px;
+  border-radius: 4px;
+  background-color: #57afb0;
+  color: #1e321e;
+}
+
+.bg-sky-50 {
+  padding: 0px 8px;
+  border-radius: 4px;
+  background-color: #296662;
+  color: #ffffff;
+}
+
+.bg-sky-60 {
+  padding: 0px 8px;
+  border-radius: 4px;
+  background-color: #123331;
+  color: #ffffff;
+}
+
+.bg-forest {
+  padding: 0px 8px;
+  border-radius: 4px;
+  background-color: #354535;
+  color: #ffffff;
+}
+
+.bg-white {
+  padding: 0px 8px;
+  border-radius: 4px;
+  background-color: #ffffff;
+  color: #1e321e;
+}
+
+.reveal pre {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0.5em auto;
+  max-width: 90%;
+}
+.reveal pre code {
+  padding: 0.5em;
+  font-size: 0.8em;
+  line-height: 1.2;
+  max-height: none;
+  overflow: visible;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.reveal pre code.jsx .token.tag,
+.reveal pre code.jsx .token.punctuation {
+  color: #f92672;
+}
+.reveal pre code.jsx .token.attr-name {
+  color: #a6e22e;
+}
+.reveal pre code.jsx .token.attr-value {
+  color: #e6db74;
+}
+.reveal pre code.smaller {
+  font-size: 0.65em;
+  line-height: 1.4;
+}
+.reveal .slides section .fragment.current-visible.visible:not(.fade-out) {
+  display: block;
+}
+
+.smaller {
+  font-size: 0.65em;
+  line-height: 1.4;
+}
+
+.reveal pre code.jsx .hljs-tag .hljs-name, .reveal pre code.javascript .hljs-tag .hljs-name, .reveal pre code.js .hljs-tag .hljs-name {
+  color: #f92672;
+}
+.reveal pre code.jsx .hljs-attr, .reveal pre code.javascript .hljs-attr, .reveal pre code.js .hljs-attr {
+  color: #a6e22e;
+}
